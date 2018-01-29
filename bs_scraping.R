@@ -1,3 +1,8 @@
+library(RCurl)
+library(XML)
+library(xml2)
+library(chron)
+library(xts)
 ##functions
 #date
 date <- function(x){
@@ -73,6 +78,20 @@ home_runs <- function(x){
 #runs away
 away_runs <- function(x){
   a <- xml_find_all(x, "/boxscore/linescore/@away_team_runs")
+  val <- trimws(xml_text(a))
+  val <- as.integer(val)
+  return(val)
+}
+#hits home
+home_hits <- function(x){
+  a <- xml_find_all(x, "/boxscore/linescore/@home_team_hits")
+  val <- trimws(xml_text(a))
+  val <- as.integer(val)
+  return(val)
+}
+#hits away
+away_hits <- function(x){
+  a <- xml_find_all(x, "/boxscore/linescore/@away_team_hits")
   val <- trimws(xml_text(a))
   val <- as.integer(val)
   return(val)
