@@ -1,6 +1,7 @@
 # boxscore_scraping
 A set of R functions to make web scraping in a single MLB box score XML file.
 The master box function is integrated by another individual functions, each function provides the following data of the game:
+
 DATE date of the game
 AWAY Away team
 aR Away Runs
@@ -16,9 +17,11 @@ HW Home wins
 HL Home losses
 ATT Game attendance
 TIME Game duration in minutes
+
 The box function collect the previous data and create a data frame with this information, as this:
 
   DATE        AWAY aR aH aE AW AL HOME hR hH hE HW HL  ATT TIME
+
 1 2017-06-15  OAX  2  9  1 28 35  PUE 11 18  0 32 33 2777  181
 
 A example for a box score XML file is this:
