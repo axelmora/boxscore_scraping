@@ -81,7 +81,7 @@ hbp <- function(x){
   return(val)
 }
 ##master function
-py_st <- function(x){
+py_st_bt <- function(x){
 
   game <- data.frame(Player_Name = names(x),
                      AB = ab(x),
@@ -97,3 +97,6 @@ py_st <- function(x){
                      )
   return(game)
 }
+##Example
+exa <- read_xml("http://gd.mlb.com/components/game/aaa/year_2017/month_06/day_15/gid_2017_06_15_oaxaaa_pueaaa_1/rawboxscore.xml")
+exascr <- py_st_bt(exa)
