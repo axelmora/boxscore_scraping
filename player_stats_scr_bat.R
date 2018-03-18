@@ -80,10 +80,46 @@ hbp <- function(x){
   val <- as.integer(val)
   return(val)
 }
+#SB
+sb <- function(x){
+  a <- xml_find_all(x, "/boxscore/team/batting/batter")
+  b <- xml_attr(a, "sb")
+  
+  for (i in 1:length(b)){
+    if (is.na(b[i])){
+      b[i] <- 0
+    }else if (b[i] > 0){
+      b[i]
+    }
+  }
+  b <- as.integer(b)
+  return(b)
+}
+#SF
+sf <- function(x){
+  a <- xml_find_all(x, "/boxscore/team/batting/batter/@sf")
+  val <- trimws(xml_text(a))
+  val <- as.integer(val)
+  return(val)
+}
+#SAC
+sac <- function(x){
+  a <- xml_find_all(x, "/boxscore/team/batting/batter/@sac")
+  val <- trimws(xml_text(a))
+  val <- as.integer(val)
+  return(val)
+}
+#TB
+tb <- function(x){
+  a <- xml_find_all(x, "/boxscore/team/batting/batter/@tb")
+  val <- trimws(xml_text(a))
+  val <- as.integer(val)
+  return(val)
+}
 ##master function
 py_st_bt <- function(x){
 
-  game <- data.frame(Player_Name = names(x),
+  batter <- data.frame(Batter_Name = names(x),
                      AB = ab(x),
                      R = r(x),
                      H = h(x),
@@ -93,10 +129,11 @@ py_st_bt <- function(x){
                      RBI = rbi(x),
                      BB = bb(x),
                      SO = so(x),
-                     HBP = hbp(x)
+                     HBP = hbp(x),
+                     SB = sb(x),
+                     SF = sf(x),
+                     SH = sac(x)
+                     #TB = tb(x)
                      )
-  return(game)
+  return(batter)
 }
-##Example
-exa <- read_xml("http://gd.mlb.com/components/game/aaa/year_2017/month_06/day_15/gid_2017_06_15_oaxaaa_pueaaa_1/rawboxscore.xml")
-exascr <- py_st_bt(exa)

@@ -18,28 +18,28 @@ out <- function(x){
   return(val)
 }
 #BB
-bb <- function(x){
+bbp <- function(x){
   a <- xml_find_all(x, "/boxscore/team/pitching/pitcher/@bb")
   val <- trimws(xml_text(a))
   val <- as.integer(val)
   return(val)
 }
 #H
-h <- function(x){
+hp <- function(x){
   a <- xml_find_all(x, "/boxscore/team/pitching/pitcher/@h")
   val <- trimws(xml_text(a))
   val <- as.integer(val)
   return(val)
 }
 #HR
-hr <- function(x){
+hrp <- function(x){
   a <- xml_find_all(x, "/boxscore/team/pitching/pitcher/@hr")
   val <- trimws(xml_text(a))
   val <- as.integer(val)
   return(val)
 }
 #R
-r <- function(x){
+rp <- function(x){
   a <- xml_find_all(x, "/boxscore/team/pitching/pitcher/@r")
   val <- trimws(xml_text(a))
   val <- as.integer(val)
@@ -60,8 +60,29 @@ bk <- function(x){
   return(val)
 }
 #SO
-so <- function(x){
+sop <- function(x){
   a <- xml_find_all(x, "/boxscore/team/pitching/pitcher/@so")
+  val <- trimws(xml_text(a))
+  val <- as.integer(val)
+  return(val)
+}
+#AO
+ao <- function(x){
+  a <- xml_find_all(x, "/boxscore/team/pitching/pitcher/@ao")
+  val <- trimws(xml_text(a))
+  val <- as.integer(val)
+  return(val)
+}
+#GO
+go <- function(x){
+  a <- xml_find_all(x, "/boxscore/team/pitching/pitcher/@go")
+  val <- trimws(xml_text(a))
+  val <- as.integer(val)
+  return(val)
+}
+#BF
+bf <- function(x){
+  a <- xml_find_all(x, "/boxscore/team/pitching/pitcher/@bf")
   val <- trimws(xml_text(a))
   val <- as.integer(val)
   return(val)
@@ -129,22 +150,19 @@ sv <- function(x){
 ##master function
 py_st_pt <- function(x){
   
-  game <- data.frame(Player_Name = name_p(x),
+  pitcher <- data.frame(Pitcher_Name = name_p(x),
                      OUT = out(x),
-                     H = h(x),
-                     HR = hr(x),
-                     R = r(x),
+                     H = hp(x),
+                     HR = hrp(x),
+                     R = rp(x),
                      ER = er(x),
-                     SO = so(x),
-                     BB = bb(x),
+                     SO = sop(x),
+                     BB = bbp(x),
                      BK = bk(x),
                      W = w(x),
                      L = l(x),
                      HLD = hd(x),
                      SV = sv(x)
   )
-  return(game)
+  return(pitcher)
 }
-##Example
-exa <- read_xml("http://gd.mlb.com/components/game/aaa/year_2017/month_06/day_15/gid_2017_06_15_oaxaaa_pueaaa_1/rawboxscore.xml")
-exascr <- py_st_pt(exa)
