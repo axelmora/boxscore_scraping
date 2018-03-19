@@ -111,7 +111,7 @@ away_errors <- function(x){
   return(val)
 }
 ##master function
-box <- function(x){
+bs <- function(x){
   date <- date(x)
   at <- awayteam(x)
   ht <- hometeam(x)
@@ -138,7 +138,3 @@ box <- function(x){
   )
   return(game)
 }
-##scoreborad example
-exa <- read_xml("http://gd.mlb.com/components/game/aaa/year_2017/month_06/day_15/gid_2017_06_15_oaxaaa_pueaaa_1/rawboxscore.xml")
-exascr <- box(exa)
-write.csv(exascr,"lmb_boxscore.csv")

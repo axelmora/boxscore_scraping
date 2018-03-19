@@ -12,13 +12,13 @@ dias <- c(1:31)
 aux <- list()
 for(i in c(1,2,3,4,5,6,7,8,9)){
   bx <- read_xml(gsub(" ","",paste("http://www.milb.com/gdcross/components/game/aaa/year_2017/month_08/day_0",i,"/master_scoreboard.xml")))
-  aux[[i]] <- box(bx)
+  aux[[i]] <- wl(bx)
   bxmaster <- rbind(bxmaster,aux[[i]])
 }
 
 ##import data manual
 bx <- read_xml("http://www.milb.com/gdcross/components/game/aaa/year_2017/month_03/day_31/master_scoreboard.xml")
-bxmaster <- box(bx)
+bxmaster <- wl(bx)
 bxmaster <- rbind(bxmaster,bxmaster1)
 
 ##functions
@@ -71,7 +71,7 @@ away_losses <- function(x){
 }
 
 ##master function
-box <- function(x){
+wl <- function(x){
   date <- date(x)
   at <- awayteam(x)
   ht <- hometeam(x)
